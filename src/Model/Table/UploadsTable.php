@@ -6,6 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use CakephpBlueimpUpload\Model\Entity\AlaxosUpload;
+use Cake\Core\Configure;
 
 /**
  * AlaxosUploads Model
