@@ -1,0 +1,23 @@
+{
+    "name": "alaxos/cakephp3-blueimp-upload",
+    "description": "CakePHP 3 plugin allowing to easily use the blueimp jQuery-File-Upload",
+    "type": "cakephp-plugin",
+    "keywords" : ["cakephp", "libraries", "jQuery-File-Upload", "upload", "blueimp"],
+    "homepage": "https://github.com/alaxos/cakephp3-blueimp-upload",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4",
+        "cakephp/cakephp": "~3.0",
+        "alaxos/cakephp3-libs": "~1.0"
+    },
+    "require-dev": {
+		"phpunit/phpunit": "*"
+	},
+    "autoload": {
+        "psr-4": {
+            "CakephpBlueimpUpload\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
+
