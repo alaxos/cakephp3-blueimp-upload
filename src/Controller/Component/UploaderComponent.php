@@ -168,9 +168,8 @@ class UploaderComponent extends Component
                                     $upload->original_filename    = $original_filename;
                                     $upload->unique_filename      = $unique_filename;
                                     $upload->subfolder            = $subfolder;
-                                    $upload->mimetype             = FileTool::getMimetype($uploaded_filepath);;
-                                    $upload->size                 = filesize($uploaded_filepath);;
-                                    $upload->hash                 = sha1_file($uploaded_filepath);;
+                                    $upload->mimetype             = FileTool::getMimetype($uploaded_filepath);
+                                    $upload->size                 = filesize($uploaded_filepath);
                                     $upload->upload_id            = $upload_id;
                                     $upload->label                = null;
                                     
@@ -180,6 +179,7 @@ class UploaderComponent extends Component
                                          * Note: it seems that when $total_filesize is not set, the file is uploaded in only one POST request -> it is always complete
                                          */
                                         $upload->complete = true;
+                                        $upload->hash     = sha1_file($uploaded_filepath);
                                     }
                                     else
                                     {
