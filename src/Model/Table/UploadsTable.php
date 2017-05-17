@@ -28,6 +28,7 @@ class UploadsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Alaxos.UserLink');
     }
 
     /**
