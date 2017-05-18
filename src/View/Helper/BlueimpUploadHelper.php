@@ -173,34 +173,45 @@ class BlueimpUploadHelper extends Helper
             if($options['auto_submit']) {
                 $js[] = '        data.submit();';
             } else {
-                //$js[] = '        $("' . $options['submit_btn_selector'] . '").off("click").on("click", function () {';
-                $js[] = '        $("' . $options['submit_btn_selector'] . '").on("click", function () {';
-                $js[] = '            if(data.files.length > 0) {';
-                $js[] = '                data.submit();';
-                $js[] = '            }';
+                $js[] = '        var selected_filenames = [];';
+                $js[] = '        $("' . $options['files_list_selector'] . '").find("div.filename").each(function(index, data){';
+                $js[] = '            selected_filenames.push($(this).html());';
                 $js[] = '        });';
+                $js[] = '        ';
 
                 $js[] = '        $.each(data.files, function (index, file) {';
-                $js[] = '   ';
-
-                $js[] = '            var file_row = "<div class=\"row file-item\">"';
-                $js[] = '            file_row += "<div class=\"col-md-10\">"';
-                $js[] = '            file_row += file.name';
-                $js[] = '            file_row += "</div>"';
-                $js[] = '            file_row += "<div class=\"col-md-2\">"';
-                $js[] = '            file_row += "<span class=\"delete-file-item-btn\">X</span>"';
-                $js[] = '            file_row += "</div>"';
-                $js[] = '            file_row += "</div>"';
                 $js[] = '            ';
-                $js[] = '            file_row = $(file_row);';
-                $js[] = '            ';
-
-                $js[] = '            $("' . $options['files_list_selector'] . '").append(file_row);';
-                $js[] = '            ';
-                $js[] = '            file_row.find(".delete-file-item-btn").click(function(){';
-                $js[] = '               data.files.length = 0;';
-                $js[] = '               file_row.remove();';
-                $js[] = '            });';
+                $js[] = '            if ($.inArray(file.name, selected_filenames) == -1) {';
+                $js[] = '                ';
+                $js[] = '                $("' . $options['submit_btn_selector'] . '").on("click", function () {';
+                $js[] = '                   if(data.files.length > 0) {';
+                $js[] = '                       data.submit();';
+                $js[] = '                   }';
+                $js[] = '                });';
+                $js[] = '                ';
+                $js[] = '                var file_row = "<div class=\"row file-item\">";';
+                $js[] = '                file_row += "<div class=\"col-md-10 filename\">";';
+                $js[] = '                file_row += file.name;';
+                $js[] = '                file_row += "</div>";';
+                $js[] = '                file_row += "<div class=\"col-md-2\">";';
+                $js[] = '                file_row += "<span class=\"delete-file-item-btn\">X</span>";';
+                $js[] = '                file_row += "</div>";';
+                $js[] = '                file_row += "</div>";';
+                $js[] = '                ';
+                $js[] = '                file_row = $(file_row);';
+                $js[] = '                ';
+                $js[] = '                $("' . $options['files_list_selector'] . '").append(file_row);';
+                $js[] = '                ';
+                $js[] = '                file_row.find(".delete-file-item-btn").click(function(){';
+                $js[] = '                    data.files.length = 0;';
+                $js[] = '                    file_row.remove();';
+                $js[] = '                });';
+                $js[] = '                ';
+                $js[] = '                data.context = file_row;';
+                $js[] = '                ';
+                $js[] = '            } else {';
+                $js[] = '                return false;';
+                $js[] = '            }';
                 $js[] = '            ';
                 $js[] = '        });';
             }
