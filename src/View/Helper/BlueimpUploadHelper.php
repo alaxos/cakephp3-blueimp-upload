@@ -54,7 +54,7 @@ class BlueimpUploadHelper extends Helper
 
         $options = array_merge($default_options, $options);
 
-        $options['csrf_token']                 = isset($options['csrf_token'])                 ? $options['csrf_token']                 : $this->request->param('_csrfToken');
+        $options['csrf_token']                 = isset($options['csrf_token'])                 ? $options['csrf_token']                 : $this->request->getParam('_csrfToken');
         $options['input_button_selector']      = isset($options['input_button_selector'])      ? $options['input_button_selector']      : '#' . $upload_id . ' input[type=file]';
         $options['progress_bar_zone_selector'] = isset($options['progress_bar_zone_selector']) ? $options['progress_bar_zone_selector'] : '#' . $upload_id . ' .progress-bar-zone';
         $options['progress_bar_selector']      = isset($options['progress_bar_selector'])      ? $options['progress_bar_selector']      : '#' . $upload_id . ' .progress';

@@ -4,7 +4,7 @@ namespace CakephpBlueimpUpload\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * AlaxosUpload Entity.
+ * Upload Entity.
  */
 class Upload extends Entity
 {

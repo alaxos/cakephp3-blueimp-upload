@@ -17,43 +17,46 @@ class UploaderComponent extends Component
      * @var array
      */
     protected $_defaultConfig = [];
-    
+
     /**
      * Contains last upload errors
-     * 
+     *
      * @var array
      */
     protected $_upload_errors = [];
-    
-    
+
+
     public function upload($upload_folder, $options = array())
     {
         $default_options = ['auto_subfolder'     => true,
                             'override_by_name'   => false,
                             'accepted_mimetypes' => []
                            ];
-        
+
         $options = array_merge($default_options, $options);
-        
+
         $controller = $this->_registry->getController();
-        
+
         $upload_table = $controller->loadModel('CakephpBlueimpUpload.Uploads');
-        
+
         /*
          * Reset errors
          */
         $this->_upload_errors = [];
-        
-        if($this->request->is(['post', 'put']))
+
+        $request = $this->getController()->getRequest();
+
+        if($request->is(['post', 'put']))
         {
-            $upload_id      = $this->request->header('X-Upload-id');
-            $content_length = $this->request->header('Content-Length');
-            $content_range  = $this->request->header('Content-Range');
-            $content_type   = $this->request->contentType();; // this is insecure !
-            
-            if(isset($this->request->data['files']))
+            $upload_id      = $request->getHeaderLine('X-Upload-id');
+            $content_length = $request->getHeaderLine('Content-Length');
+            $content_range  = $request->getHeaderLine('Content-Range');
+            $content_type   = $request->contentType();; // this is insecure !
+
+            $files = $request->getData('files');
+            if(isset($files))
             {
-                foreach($this->request->data['files'] as $uploaded_file)
+                foreach($files as $uploaded_file)
                 {
                     if(is_uploaded_file($uploaded_file['tmp_name']))
                     {
@@ -62,25 +65,25 @@ class UploaderComponent extends Component
                         if(!empty($options['accepted_mimetypes']))
                         {
                             $mimetype = $uploaded_file['type'];
-                            
+
                             if(!in_array($mimetype, $options['accepted_mimetypes']))
                             {
                                 $valid_mimetype = false;
                             }
                         }
-                        
+
                         if($valid_mimetype)
                         {
                             $original_filename = $uploaded_file['name'];
-                            
+
                             $total_filesize = null;
                             if(stripos($content_range, '/') !== false)
                             {
                                 $total_filesize = substr($content_range, stripos($content_range, '/') + 1);
                             }
-                            
+
                             $chunk_size = $uploaded_file['size'];
-                            
+
                             if(!empty($upload_id) && !empty($original_filename) && !empty($chunk_size))
                             {
                                 /*
@@ -95,7 +98,7 @@ class UploaderComponent extends Component
                                     $upload_resume = true;
                                     $new_file      = false;
                                 }
-                                else 
+                                else
                                 {
                                     if($options['override_by_name'])
                                     {
@@ -105,18 +108,18 @@ class UploaderComponent extends Component
                                          */
                                         $existing_upload = $upload_table->find('all')->where(['original_filename' => $original_filename])->first();
                                     }
-                                    
+
                                     /*
                                      * This POST is a brand new file upload
                                      */
                                     $upload_resume = false;
                                     $new_file      = true;
                                 }
-                                
+
                                 /****/
-                                
+
                                 $unique_filename   = $upload_id . '_' . $original_filename;
-                                
+
                                 if($options['auto_subfolder'])
                                 {
                                     $subfolder = date('Y-m-d');
@@ -125,7 +128,7 @@ class UploaderComponent extends Component
                                         mkdir($upload_folder . DS . $subfolder);
                                         chmod($upload_folder . DS . $subfolder, 0777);
                                     }
-                                
+
                                     $uploaded_filepath = $upload_folder . DS . $subfolder . DS . $unique_filename;
                                 }
                                 else
@@ -133,11 +136,11 @@ class UploaderComponent extends Component
                                     $subfolder = null;
                                     $uploaded_filepath = $upload_folder . DS . $unique_filename;
                                 }
-                                
+
                                 /****/
-                                
+
                                 $uploaded = false;
-                                
+
                                 if($new_file)
                                 {
                                     /*
@@ -158,13 +161,13 @@ class UploaderComponent extends Component
                                         $uploaded = true;
                                     }
                                 }
-                                
+
                                 /****/
-                                
+
                                 if($uploaded)
                                 {
                                     $upload = $upload_table->newEntity();
-                                    
+
                                     $upload->original_filename    = $original_filename;
                                     $upload->unique_filename      = $unique_filename;
                                     $upload->subfolder            = $subfolder;
@@ -172,7 +175,7 @@ class UploaderComponent extends Component
                                     $upload->size                 = filesize($uploaded_filepath);
                                     $upload->upload_id            = $upload_id;
                                     $upload->label                = null;
-                                    
+
                                     if( (!empty($total_filesize) && filesize($uploaded_filepath) == $total_filesize) || empty($total_filesize) )
                                     {
                                         /*
@@ -185,12 +188,12 @@ class UploaderComponent extends Component
                                     {
                                         $upload->complete = false;
                                     }
-                                    
+
                                     if(!empty($existing_upload))
                                     {
                                         $upload->id = $existing_upload->id;
                                     }
-                                    
+
                                     if(!$upload_table->save($upload))
                                     {
                                         $this->_upload_errors = array_merge($this->_upload_errors, $upload->validationErrors);
@@ -224,9 +227,9 @@ class UploaderComponent extends Component
         }
         else
         {
-            $this->_upload_errors[] = sprintf(__d('cakephp_blueimp_upload', "'%s' method is not valid to upload", strtoupper($this->request->method())));
+            $this->_upload_errors[] = sprintf(__d('cakephp_blueimp_upload', "'%s' method is not valid to upload", strtoupper($request->getMethod())));
         }
-        
+
         if(empty($this->_upload_errors))
         {
             return $upload;
