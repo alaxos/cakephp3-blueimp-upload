@@ -1,4 +1,6 @@
 <?php
+use Cake\Core\Configure;
+
 /*
  * The database table used to store uploads
  */
