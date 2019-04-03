@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CakePHP Blueimp Upload\n"
-"POT-Creation-Date: 2019-04-03 09:38+0200\n"
-"PO-Revision-Date: 2019-04-03 09:42+0200\n"
+"POT-Creation-Date: 2019-04-03 09:57+0200\n"
+"PO-Revision-Date: 2019-04-03 09:57+0200\n"
 "Last-Translator: Nicolas Rod <nicolas.rod@unige.ch>\n"
 "Language-Team: fr <nico@alaxos.com>\n"
 "Language: fr\n"
@@ -23,32 +23,34 @@ msgstr ""
 "X-Poedit-SearchPath-2: src/View\n"
 "X-Poedit-SearchPath-3: config\n"
 
-#: src/Controller/Component/UploaderComponent.php:206
+#: src/Controller/Component/UploaderComponent.php:207
 msgid "some part of the file could not be saved"
 msgstr "certaines parties du fichier n'ont pas pu être enregistrées"
 
-#: src/Controller/Component/UploaderComponent.php:211
-msgid "the file is empty"
-msgstr "le fichier est vide "
+#: src/Controller/Component/UploaderComponent.php:212
+msgid "empty files are not allowed"
+msgstr "les fichiers vides ne sont pas autorisés"
 
-#: src/Controller/Component/UploaderComponent.php:216
+#: src/Controller/Component/UploaderComponent.php:217
 msgid "some upload metadata are missing"
 msgstr "certaines informations sur le téléchargement sont manquantes"
 
-#: src/Controller/Component/UploaderComponent.php:221
+#: src/Controller/Component/UploaderComponent.php:222
 #, php-format
 msgid "this file type (%s) can not be uploaded"
 msgstr "ce type de fichier (%s) ne peut pas être téléchargé"
 
-#: src/Controller/Component/UploaderComponent.php:226
+#: src/Controller/Component/UploaderComponent.php:227
 msgid "upload file not found"
 msgstr "fichier à télécharger absent"
 
-#: src/Controller/Component/UploaderComponent.php:232
+#: src/Controller/Component/UploaderComponent.php:233
 msgid "No data to upload found. Check that the max chunk size is not to high."
-msgstr "Aucune donné à télécharger trouvée. Veuillez vérifier que la taille maximum des paquets envoyés n'est pas trop grande."
+msgstr ""
+"Aucune donné à télécharger trouvée. Veuillez vérifier que la taille maximum "
+"des paquets envoyés n'est pas trop grande."
 
-#: src/Controller/Component/UploaderComponent.php:237
+#: src/Controller/Component/UploaderComponent.php:238
 #, php-format
 msgid "'%s' method is not valid to upload"
 msgstr "la méthode '%s' n'est pas valide pour le téléchargement"
@@ -60,3 +62,6 @@ msgstr "Envoyer"
 #: src/View/Helper/BlueimpUploadHelper.php:26
 msgid "Upload successful"
 msgstr "Envoi réussi"
+
+#~ msgid "the file is empty"
+#~ msgstr "le fichier est vide "

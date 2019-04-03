@@ -30,7 +30,8 @@ class UploaderComponent extends Component
     {
         $default_options = ['auto_subfolder'     => true,
                             'override_by_name'   => false,
-                            'accepted_mimetypes' => []
+                            'accepted_mimetypes' => [],
+                            'allow_empty_files'  => false
                            ];
 
         $options = array_merge($default_options, $options);
@@ -86,7 +87,7 @@ class UploaderComponent extends Component
 
                             if(!empty($upload_id) && !empty($original_filename))
                             {
-                                if(!empty($chunk_size))
+                                if(!empty($chunk_size) || $options['allow_empty_files'])
                                 {
                                     /*
                                      * Check if a file belonging to the same upload already exists in database
@@ -208,7 +209,7 @@ class UploaderComponent extends Component
                                 }
                                 else
                                 {
-                                    $this->_upload_errors[] = __d('cakephp_blueimp_upload', 'the file is empty');
+                                    $this->_upload_errors[] = __d('cakephp_blueimp_upload', 'empty files are not allowed');
                                 }
                             }
                             else
