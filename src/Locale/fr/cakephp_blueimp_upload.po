@@ -1,0 +1,62 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CakePHP Blueimp Upload\n"
+"POT-Creation-Date: 2019-04-03 09:38+0200\n"
+"PO-Revision-Date: 2019-04-03 09:42+0200\n"
+"Last-Translator: Nicolas Rod <nicolas.rod@unige.ch>\n"
+"Language-Team: fr <nico@alaxos.com>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;___;__n;__d:2;__c;__dc;__dn;__dcn\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: src/Controller\n"
+"X-Poedit-SearchPath-1: src/Model\n"
+"X-Poedit-SearchPath-2: src/View\n"
+"X-Poedit-SearchPath-3: config\n"
+
+#: src/Controller/Component/UploaderComponent.php:206
+msgid "some part of the file could not be saved"
+msgstr "certaines parties du fichier n'ont pas pu être enregistrées"
+
+#: src/Controller/Component/UploaderComponent.php:211
+msgid "the file is empty"
+msgstr "le fichier est vide "
+
+#: src/Controller/Component/UploaderComponent.php:216
+msgid "some upload metadata are missing"
+msgstr "certaines informations sur le téléchargement sont manquantes"
+
+#: src/Controller/Component/UploaderComponent.php:221
+#, php-format
+msgid "this file type (%s) can not be uploaded"
+msgstr "ce type de fichier (%s) ne peut pas être téléchargé"
+
+#: src/Controller/Component/UploaderComponent.php:226
+msgid "upload file not found"
+msgstr "fichier à télécharger absent"
+
+#: src/Controller/Component/UploaderComponent.php:232
+msgid "No data to upload found. Check that the max chunk size is not to high."
+msgstr "Aucune donné à télécharger trouvée. Veuillez vérifier que la taille maximum des paquets envoyés n'est pas trop grande."
+
+#: src/Controller/Component/UploaderComponent.php:237
+#, php-format
+msgid "'%s' method is not valid to upload"
+msgstr "la méthode '%s' n'est pas valide pour le téléchargement"
+
+#: src/View/Helper/BlueimpUploadHelper.php:25
+msgid "Upload"
+msgstr "Envoyer"
+
+#: src/View/Helper/BlueimpUploadHelper.php:26
+msgid "Upload successful"
+msgstr "Envoi réussi"
